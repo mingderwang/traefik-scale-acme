@@ -1,0 +1,25 @@
+logLevel = "DEBUG"
+defaultEntryPoints = ["http","https"]
+[docker]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+  [entryPoints.http.redirect]
+    entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+domain = "tokensandbox.io"
+[retry]
+[acme]
+email = "mingderwang@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+caServer = "https://acme-v02.api.letsencrypt.org/directory"
+#caServer = "https://acme-staging-v02.api.letsencrypt.org/directory"
+[acme.httpChallenge]
+  entryPoint = "http"
+[[acme.domains]]
+   main = "tokensandbox.io"
+   sans = ["www.tokensandbox.io"]

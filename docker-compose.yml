@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+
+  traefik:
+    image: traefik:1.7.0
+    command: --api --docker
+    ports:
+      - 9081:8080
+      - 443:443
+      - 80:80
+    networks:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./traefik.toml:/etc/traefik/traefik.toml
+      - ./acme.json:/acme.json
+
+  whoami1:
+    image: emilevauge/whoami
+    labels:
+      - "traefik.backend=whoami"
+      - "traefik.frontend.rule=Host:www.tokensandbox.io"
+    networks:
+      - web
+
+  whoami2:
+    image: emilevauge/whoami
+    labels:
+      - "traefik.backend=whoami"
+      - "traefik.frontend.rule=Host:www.tokensandbox.io"
+    networks:
+      - web
+
+
+networks:
+  web:
+    external: true
+
