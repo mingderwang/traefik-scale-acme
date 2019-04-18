@@ -11,7 +11,7 @@ defaultEntryPoints = ["http","https"]
     [entryPoints.https.tls]
 
 [acme]
-email = "mingderwang@gmail.com"
+email = "you@yourdomain.com"
 storage = "acme.json"
 entryPoint = "https"
 onHostRule = true
@@ -22,5 +22,5 @@ caServer = "https://acme-v02.api.letsencrypt.org/directory"
   entryPoint = "http"
 
 [[acme.domains]]
-   main = "tokensandbox.io"
-   sans = ["www.tokensandbox.io"]
+   main = "yourdomain.io"
+   sans = ["www.yourdomain.io"]
